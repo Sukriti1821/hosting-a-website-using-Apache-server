@@ -1,0 +1,26 @@
+1.	Install Apache
+             sudo apt update
+            sudo apt install apache2 -y
+2. Basic Apache Configuration
+•	Document Root: Apache’s default document root is usually /var/www/html. This is where you’ll store your website files.
+•	Configuration File: The main configuration file is /etc/apache2/apache2.conf. Site-specific configuration files are typically located in /etc/apache2/sites-available/.
+
+2.	Enable the site and reload Apache:
+sudo a2ensite mywebsite.conf
+sudo systemctl reload apache2
+3. File Permissions
+•	Set correct permissions for your website files to ensure Apache can access them:
+sudo chown -R www-data:www-data /var/www/mywebsite
+sudo chmod -R 755 /var/www/mywebsite
+4. Serving Static Content
+•	Place HTML, CSS, and JavaScript files in your document root directory, such as /var/www/mywebsite, so Apache can serve them.
+•	To test, create a sample HTML file:
+echo "<html><body bgcolor=”teal”><h1> This is the default website</h1></body></html>" | sudo tee /var/www/mywebsite/index.html
+5. Adjust Firewall
+•	Allow HTTP (port 80) and HTTPS (port 443) through the firewall:
+sudo ufw allow 'Apache Full'
+6. Enable and Start Apache
+sudo systemctl enable apache2
+sudo systemctl start apache2
+7. Test Apache
+•	Visit http://your_server_ip or http://mywebsite.com in your browser to confirm the setup.
